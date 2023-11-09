@@ -1,5 +1,5 @@
 import Link from "next/link";
-import headerClassNames from "./HeaderClassNames";
+import headerClassNames from "./headerClassNames";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
 
