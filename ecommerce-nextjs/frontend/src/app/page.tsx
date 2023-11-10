@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection/HeroSection";
 import Link from "next/link";
 import Image from "next/image";
 import GameCategoryCard from "@/components/GameCategoryCard/GameCategoryCard";
+import NewsLetter from "@/components/NewsLetter/NewsLetter";
 
 export default function Home() {
   return (
@@ -102,6 +103,7 @@ export default function Home() {
         </Link>
 
       </section>
+      <NewsLetter />
     </>
   );
 };

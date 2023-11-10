@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import GameCategoryCardClassNames from './GameCategoryCardClassNames';
+import GameCategoryCardClassNames from './gameCategoryCardClassNames';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -22,7 +22,7 @@ const GameCategoryCard: FC<GameCatergoryCardProps> = (props) => {
         <Link href={`categories/${slug}`} className={container}>
             <Image 
               src={categoryImage}
-              alt={name}
+              alt={categoryName}
               width={200}
               height={200}
               className={image}
