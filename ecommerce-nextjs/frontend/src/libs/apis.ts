@@ -63,3 +63,25 @@ export const getCategory = async (slug: string): Promise<Category> => {
     const category: Category = await sanityClient.fetch({ query });
     return category;
 };
+
+export const getRecentGames = async (): Promise<Game[]> => {
+    const query = `*[_type == 'game'] | order(_createdAt desc)[0...4] {
+        name,
+        price,
+        images,
+        isFeatured,
+        isTrending,
+        'category' : *[_id == ^.category._ref][0] {
+            name,
+            slug {
+                current
+            }
+        },
+        slug,
+        quantity,
+        description
+    }`;
+
+    const games: Game[] = await sanityClient.fetch({ query });
+    return games;
+}
