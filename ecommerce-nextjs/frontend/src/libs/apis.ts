@@ -18,7 +18,6 @@ export const getCategories = async (): Promise<Category[]> => {
 export const getGames = async (): Promise<Game[]> => {
     const query = `*[_type == 'game'] {
         name,
-
         price,
         images,
         isFeatured,
@@ -40,6 +39,7 @@ export const getGames = async (): Promise<Game[]> => {
 
 export const getCategoryGames = async(slug: string): Promise<Game[]> => {
     const query = `*[_type == 'game' && category->slug.current == '${slug}'] {
+        name,
         price,
         images,
         isFeatured,
