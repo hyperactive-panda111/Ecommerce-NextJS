@@ -4,15 +4,14 @@ import Link from "next/link";
 import Image from "next/image";
 import GameCategoryCard from "@/components/GameCategoryCard/GameCategoryCard";
 import NewsLetter from "@/components/NewsLetter/NewsLetter";
-import { getCategories, getGames } from "@/libs/apis";
+import { getCategories, getGames, getRecentGames } from "@/libs/apis";
 
 export default async function Home() {
   const categories = await getCategories();
   const games = await getGames();
   const isTrendingGames = games?.filter(game => game.isTrending);
   const isFeatured = games?.find(game => game.isFeatured);
-
-  console.log(categories);
+  const recentGames = await getRecentGames();
 
   return (
     <>
@@ -99,7 +98,7 @@ export default async function Home() {
         </p>
 
         <div className="flex rounded gap-8 flex-wrap py-10">
-          {games.map((game) => (
+          {recentGames.map((game) => (
             <GameCard
               key={game._id}
               gameName={game.name}
