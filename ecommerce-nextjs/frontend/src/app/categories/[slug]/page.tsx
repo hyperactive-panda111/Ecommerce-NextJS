@@ -29,15 +29,15 @@ const GameCategory = async (props: { params: { slug: string }}) => {
             Checkout our latest collection of{' '}
             <span className="text-primary">{slug}</span>
           </p>
-          <div className='flex rounder gap-8 flex-wrap py-10'>
-            {games.map((game) =>
+          <div className='flex rounded gap-8 flex-wrap py-10'>
+            {games.map((game) => ( 
             <GameCard 
             key={game._id}
             gameName={game.name} 
             imageUrl={game.images[0].url} 
             slug={game.slug.current} 
             price={game.price}            
-            />
+            />)
             )}
           </div>
         </section> 
