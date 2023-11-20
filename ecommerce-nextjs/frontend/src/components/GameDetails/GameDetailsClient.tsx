@@ -25,7 +25,6 @@ const GameDetailsClient =  (props: {slug: string; children: React.ReactNode }) =
       };
 
       fetchGameDetails(); 
-
     }, [slug]);
 
     
@@ -56,9 +55,8 @@ const GameDetailsClient =  (props: {slug: string; children: React.ReactNode }) =
                 <div className={classNames.productInfo}>
                     <div className={classNames.cartContainer}>
                         <button
-                        className={`${classNames.button} ${
-                            quantity === 0 && classNames.disabledButton
-                        }`}
+                        className={`${classNames.button} 
+                        ${ quantity === 0 && classNames.disabledButton}`}
                         disabled={quantity === 0}
                         onClick={handleDecrease}
                         >
@@ -72,7 +70,7 @@ const GameDetailsClient =  (props: {slug: string; children: React.ReactNode }) =
                             readOnly
                         />
                         {gameDetails && 
-                       ( <button
+                       (<button
                         onClick={handleIncrease}
                         className={`${classNames.button} ${
                             quantity === gameDetails.quantity && classNames.disabledButton}`}
