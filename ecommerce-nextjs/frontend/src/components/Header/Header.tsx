@@ -1,7 +1,12 @@
+'use client';
+
 import Link from "next/link";
 import headerClassNames from "./headerClassNames";
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import { FcGoogle } from 'react-icons/fc';
+import { useAppDispatch } from "@/hooks/storeHook";
+import useCartTotals from "@/hooks/useCartTotals";
+import { toggleCart } from "@/redux/features/cartSlice";
 
 const Header = () => {
     const {
@@ -21,6 +26,9 @@ const Header = () => {
         cart,
     } = headerClassNames;
 
+    const {totalQuantity} = useCartTotals();
+    const dispatch = useAppDispatch();
+
 
 return (
     <header className={header}>
@@ -32,11 +40,12 @@ return (
             <nav className={nav}>
                 <ul className={ul}>
                     <li>
-                        <button className={link}>
+                        <button className={link}
+                        onClick={() => dispatch(toggleCart())}>
                             <span>Cart
                             <AiOutlineShoppingCart className='inline-block text-3xl' />
                             </span>
-                            <div className={cart}>10</div>
+                            <div className={cart}>{totalQuantity}</div>
                         </button>
                     </li>
 

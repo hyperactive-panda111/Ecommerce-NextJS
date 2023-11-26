@@ -1,18 +1,28 @@
 'use client';
 
 import { useAppDispatch, useAppSelector } from "@/hooks/storeHook";
+import useCartTotals from "@/hooks/useCartTotals";
 import { removeItemFromCart, toggleCart } from "@/redux/features/cartSlice";
 import Image from "next/image";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { RiCloseLine } from 'react-icons/ri'; 
 
 const Cart: FC = () => {
-    const { cart: { showCart, cartItems},
-} = useAppSelector(state => state);
+    const  { showCart, cartItems} = useAppSelector(state => state.cart);
+const [renderComponent, setRenderComponent] = useState(false);
+
+const {totalPrice} = useCartTotals();
 
 const dispatch = useAppDispatch();
 
 const handleRemoveItem = (id: string) => dispatch(removeItemFromCart({ _id: id}));
+
+useEffect(() => {
+    setRenderComponent(true);
+}, []);
+
+if (!renderComponent) return <></>;
+
 return (
     <div
         className={`${classNames.container} ${showCart ? 'translate-x-0' : 'translate-x-full'}`}>
@@ -37,7 +47,7 @@ return (
                         <p>$ {item.price.toFixed(2)}</p>
                     </div>
                     <div className={cartItemClassNames.quantityContainer}>
-                        <span className={cartItemClassNames.quantity}>2</span>
+                        <span className={cartItemClassNames.quantity}>{item.quantity}</span>
                         <button onClick={() => handleRemoveItem(item._id)} className={cartItemClassNames.removeButton}>
                             <RiCloseLine />
                         </button>
@@ -48,7 +58,7 @@ return (
             </div>
             <div className={classNames.subtotalContainer}>
                 <span className={classNames.subtotalText}>Subtotal</span>
-                <span className={classNames.subtotalPrice}>999</span>
+                <span className={classNames.subtotalPrice}>$ {totalPrice}</span>
             </div>
             <button className={classNames.checkoutBtn}>Checkout</button>
         </div>
