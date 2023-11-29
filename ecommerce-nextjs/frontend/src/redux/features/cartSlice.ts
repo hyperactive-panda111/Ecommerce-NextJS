@@ -9,7 +9,7 @@ interface cartState {
 };
 
 const initialState: cartState = {
-    showCart: true,
+    showCart: false,
     cartItems: cartFromLocalStorage,
 }
 const cartSlice = createSlice({
