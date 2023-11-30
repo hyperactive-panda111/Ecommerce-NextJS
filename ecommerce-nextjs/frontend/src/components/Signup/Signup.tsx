@@ -2,6 +2,7 @@
 
 import { FC, useRef, useState } from "react";
 import axios from 'axios';
+import { toast } from "react-hot-toast";
 
 interface SignupProps {
     isSignupFormOpen: boolean;
@@ -30,10 +31,10 @@ const Signup: FC<SignupProps> = (props) => {
              setIsFormSubmitting(false);
          
 
-           if (response.data) window.alert('Sign up success. Please sign in.');  
+           if (response.data) toast.success(`${response.statusText}. Please sign in.`)  
         } catch (error) {
             setIsFormSubmitting(false);
-            toggleForm();
+            toast.error('Something went wrong');
             console.log('Error: ', error);
         }
 
