@@ -38,7 +38,7 @@ const Header = () => {
     };
 
     return (<>
-        <Signup isSignupFormOpen={isSignupFormOpen} toggleForm={toggleCart}/>
+        <Signup isSignupFormOpen={isSignupFormOpen} toggleForm={toggleForm}/>
         <header className={header}>
             <div className={container}>
                 <Link href='\' className={logoContainer}>
