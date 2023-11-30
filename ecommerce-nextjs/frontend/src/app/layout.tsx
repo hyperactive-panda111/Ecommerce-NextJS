@@ -3,7 +3,7 @@ import './globals.css'
 import { Metadata } from 'next'
 import Header from '@/components/Header/Header';
 import Footer from '@/components/Footer/Footer';
-import { Providers } from '@/redux/Provider';
+import { Providers } from '@/redux/Providers';
 import Cart from '@/components/Cart/Cart';
 
 const montserrat = Montserrat({

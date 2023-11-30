@@ -36,6 +36,8 @@ const Signup: FC<SignupProps> = (props) => {
             toggleForm();
             console.log('Error: ', error);
         }
+
+        toggleForm();
     };
 
     return isSignupFormOpen ? (
