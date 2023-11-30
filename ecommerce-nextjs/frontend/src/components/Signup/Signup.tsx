@@ -28,9 +28,9 @@ const Signup: FC<SignupProps> = (props) => {
              });
 
              setIsFormSubmitting(false);
-             toggleForm();
+         
 
-             if (response.data) window.alert('Sign up success. Please sign in');
+           if (response.data) window.alert('Sign up success. Please sign in.');  
         } catch (error) {
             setIsFormSubmitting(false);
             toggleForm();
@@ -38,6 +38,7 @@ const Signup: FC<SignupProps> = (props) => {
         }
 
         toggleForm();
+
     };
 
     return isSignupFormOpen ? (
