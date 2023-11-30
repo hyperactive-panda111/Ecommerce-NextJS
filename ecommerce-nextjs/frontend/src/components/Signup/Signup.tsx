@@ -1,4 +1,7 @@
-import { FC } from "react";
+'use client';
+
+import { FC, useRef, useState } from "react";
+import axios from 'axios';
 
 interface SignupProps {
     isSignupFormOpen: boolean;
@@ -7,6 +10,33 @@ interface SignupProps {
 
 const Signup: FC<SignupProps> = (props) => {
     const { isSignupFormOpen, toggleForm } = props;
+
+    const [isFormSubmitting, setIsFormSubmitting] = useState(false);
+
+    const emailRef = useRef<HTMLInputElement>(null);
+    const passwordRef = useRef<HTMLInputElement>(null);
+
+    const signupHandler = async () => {
+        if (!emailRef.current || !passwordRef.current) return;
+
+        setIsFormSubmitting(true);
+
+        try {
+             const response = await axios.post('api/signup', {
+                email: emailRef.current.value,
+                password: passwordRef.current.value,
+             });
+
+             setIsFormSubmitting(false);
+             toggleForm();
+
+             if (response.data) window.alert('Sign up success. Please sign in');
+        } catch (error) {
+            setIsFormSubmitting(false);
+            toggleForm();
+            console.log('Error: ', error);
+        }
+    };
 
     return isSignupFormOpen ? (
         <div className={classNames.container}>
@@ -17,7 +47,9 @@ const Signup: FC<SignupProps> = (props) => {
                         <label htmlFor="email" className={classNames.label}>
                             Email
                         </label>
-                        <input type="email" 
+                        <input 
+                        type="email"
+                        ref={emailRef} 
                         className={classNames.input}
                         id='email' 
                         placeholder="Enter your email"
@@ -27,15 +59,24 @@ const Signup: FC<SignupProps> = (props) => {
                         <label htmlFor="password" className={classNames.label}>
                             Password
                         </label>
-                        <input type="password" 
+                        <input 
+                        type="password"
+                        ref={passwordRef} 
                         className={classNames.input}
                          id='password' 
                          placeholder="Enter your password"
                          />
                     </div>
                     <div className={classNames.btnContainer}>
-                        <span className={classNames.cancel}>Cancel</span>
-                        <button className={classNames.confirm } type="button">Sign Up</button>
+                        <span onClick={() => toggleForm()} className={classNames.cancel}>Cancel</span>
+                        <button 
+                         disabled={isFormSubmitting}
+                         onClick={signupHandler}
+                         className={classNames.confirm} 
+                         type="button"
+                         >
+                        Sign Up
+                        </button>
                     </div>
                 </form>
 
