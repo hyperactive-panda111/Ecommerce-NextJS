@@ -2,11 +2,11 @@ import { FC } from "react";
 
 interface SignupProps {
     isSignupFormOpen: boolean;
-    toogleForm: () => void;
+    toggleForm: () => void;
 }
 
 const Signup: FC<SignupProps> = (props) => {
-    const { isSignupFormOpen, toogleForm } = props;
+    const { isSignupFormOpen, toggleForm } = props;
 
     return isSignupFormOpen ? (
         <div className={classNames.container}>
