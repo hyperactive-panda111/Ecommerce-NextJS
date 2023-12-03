@@ -9,6 +9,7 @@ import useCartTotals from "@/hooks/useCartTotals";
 import { toggleCart } from "@/redux/features/cartSlice";
 import Signup from "../Signup/Signup";
 import { useState } from "react";
+import { signIn, signOut } from 'next-auth/react';
 
 const Header = () => {
     const {
@@ -37,6 +38,14 @@ const Header = () => {
         setIsSignUpFormOpen(!isSignupFormOpen);
     };
 
+    const signinHander = async () => {
+        try {
+            await signIn();
+        } catch (error) {
+            console.log('SIGN IN ERROR:', error);
+        }
+    }
+
     return (<>
         <Signup isSignupFormOpen={isSignupFormOpen} toggleForm={toggleForm}/>
         <header className={header}>
@@ -63,7 +72,7 @@ const Header = () => {
                             </Link>
                             <button className={logoutBtn}>Logout</button>
                             <button className={signupBtn} onClick={toggleForm}>Sign Up</button>
-                            <button className={signinBtn}>
+                            <button onClick={signinHander} className={signinBtn}>
                                 Sign In
                                 <FcGoogle
                                     style={{

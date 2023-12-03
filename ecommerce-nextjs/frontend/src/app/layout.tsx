@@ -6,6 +6,7 @@ import Footer from '@/components/Footer/Footer';
 import { Providers } from '@/redux/Providers';
 import Cart from '@/components/Cart/Cart';
 import Toast from '@/components/Toast/Toast';
+import { NextAuthProvider } from '@/components/AuthProvider/AuthProvider';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -35,12 +36,14 @@ export default function RootLayout({
     <html lang="en" className={`${ poppins.variable} ${ montserrat.variable }`}>
       <body>
         <Toast />
-        <Providers>
+      <NextAuthProvider>
+      <Providers>
           <Cart />
           <Header />
           <main className='bg-primary-gradient min-h-screen'>{children}</main>
           <Footer />
           </Providers>
+      </NextAuthProvider>
       </body>
     </html>
   );
