@@ -9,7 +9,8 @@ import useCartTotals from "@/hooks/useCartTotals";
 import { toggleCart } from "@/redux/features/cartSlice";
 import Signup from "../Signup/Signup";
 import { useState } from "react";
-import { signIn, signOut } from 'next-auth/react';
+import { signIn, signOut, useSession } from 'next-auth/react';
+
 
 const Header = () => {
     const {
@@ -33,7 +34,10 @@ const Header = () => {
     const dispatch = useAppDispatch();
 
     const [isSignupFormOpen, setIsSignUpFormOpen] = useState(false);
+    const { status, data: session } = useSession({ required: true, onUnauthenticated() {
 
+    } });
+ 
     const toggleForm = () => {
         setIsSignUpFormOpen(!isSignupFormOpen);
     };
@@ -67,10 +71,13 @@ const Header = () => {
                         </li>
 
                         <li className="flex items-center justify-center h-7">
+                        {session?.user && (<>
                             <Link href='/orders' className={orders}>
                                 Orders
                             </Link>
-                            <button className={logoutBtn}>Logout</button>
+                            <button onClick={() => signOut()} className={logoutBtn}>Logout</button>
+                        </>)}
+                           {!session?.user && (<>
                             <button className={signupBtn} onClick={toggleForm}>Sign Up</button>
                             <button onClick={signinHander} className={signinBtn}>
                                 Sign In
@@ -83,6 +90,7 @@ const Header = () => {
                                     className={link} 
                                 />
                             </button>
+                           </>)}
                         </li>
                     </ul>
                 </nav>
