@@ -41,7 +41,7 @@ return (
         className={`${classNames.container} ${showCart ? 'translate-x-0' : 'translate-x-full'}`}>
             <div className={classNames.header}>
                 <h2 className={classNames.title}>Shopping Cart</h2>
-                <button className={classNames.closeBtn} onClick={() => dispatch(toggleCart)}>X</button>
+                <button className={classNames.closeBtn} onClick={() => dispatch(toggleCart())}>X</button>
             </div>
 
             <div className={classNames.itemContainer}>
