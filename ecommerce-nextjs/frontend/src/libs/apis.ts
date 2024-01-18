@@ -183,8 +183,8 @@ export async function fetchOrder(userEmail: string) {
                 description
             }
         },
-        orderStatus
-        createdAt
+        orderStatus,
+        createdAt,
     }`
 
     const params = { userEmail };
