@@ -5,6 +5,7 @@ import useCartTotals from "@/hooks/useCartTotals";
 import { getStripe } from "@/libs/loadStripe";
 import { removeItemFromCart, toggleCart } from "@/redux/features/cartSlice";
 import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
 import { RiCloseLine } from 'react-icons/ri'; 
@@ -15,6 +16,8 @@ const [renderComponent, setRenderComponent] = useState(false);
 
 const {totalPrice} = useCartTotals();
 
+const { data: session } = useSession()
+
 const dispatch = useAppDispatch();
 
 const handleRemoveItem = (id: string) => 
@@ -23,9 +26,11 @@ const handleRemoveItem = (id: string) =>
 const checkoutHandler = async () => {
     const stripe = await getStripe();
 
-    const {data} = await axios.post('/api/stripe', cartItems);
+    const { data } = await axios.post('/api/stripe', { cartItems, userEmail: session?.user?.email });
 
     if (!data) return;
+
+    localStorage.removeItem('cart');
 
     stripe.redirectToCheckout({ sessionId: data.id });
 };
