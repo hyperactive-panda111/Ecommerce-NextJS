@@ -1,12 +1,23 @@
+import { getServerSession } from "next-auth";
+import { redirect } from 'next/navigation';
+
 import HeroSection from "@/components/HeroSection/HeroSection";
 import { fetchOrder } from "@/libs/apis";
+import { authOptions } from "@/libs/auth";
 
 const Orders = async () => {
     const orderData: any = await fetchOrder('test@test.com');
-
     
+   
     const Orders = async () => {
-        const orderData: any = await fetchOrder('test@test.com');
+        const session = await getServerSession(authOptions);
+
+        if (!session) {
+            redirect('/');
+        };
+
+        const email = session?.user?.email as string;
+        const orderData: any = await fetchOrder(email);
     
         return (
             <div>
