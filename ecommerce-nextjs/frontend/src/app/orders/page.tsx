@@ -6,10 +6,7 @@ import { fetchOrder } from "@/libs/apis";
 import { authOptions } from "@/libs/auth";
 
 const Orders = async () => {
-    const orderData: any = await fetchOrder('test@test.com');
-    
-   
-    const Orders = async () => {
+  
         const session = await getServerSession(authOptions);
 
         if (!session) {
@@ -68,7 +65,6 @@ const Orders = async () => {
             </div>
             </div>
         )
-    }
 };
 
 export default Orders;
