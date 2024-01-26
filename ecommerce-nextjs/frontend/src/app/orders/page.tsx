@@ -38,7 +38,8 @@ const Orders = async () => {
                                 return acc + itemPrice;
                             }, 0);
     
-                            return ( <tr key={order._id} className="border-b bg-gray-800 border-gray-700">
+                            return ( 
+                                <tr key={order._id} className="border-b bg-gray-800 border-gray-700">
                                 <th 
                                 scope="row"
                                 className="px-6 py-4 font-medium whitespace-nowrap text-white">
@@ -50,12 +51,12 @@ const Orders = async () => {
     
                             <td className='px-6 py-4'>
                                 {order.items.map((item: any) => (<span key={item._id}>
-                                        {item.game.price} < br />
+                                        {item.game.price} <br />
                                     </span>
                                 ))}
                             </td>
                             <td className='px-6 py-4'>{order.orderStatus}</td>
-                            <td className='px-6 py-4'>{totalPrice}</td>
+                            <td className='px-6 py-4'>$ {totalPrice}</td>
                             </tr>
                             
                             )})}
