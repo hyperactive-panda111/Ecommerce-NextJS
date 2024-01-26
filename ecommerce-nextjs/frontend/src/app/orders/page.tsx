@@ -61,10 +61,9 @@ const Orders = async () => {
                             
                             )})}
                     </tbody>
-                </table>
-    
+                </table>   
             </div>
-            </div>
+        </div>
         )
 };
 

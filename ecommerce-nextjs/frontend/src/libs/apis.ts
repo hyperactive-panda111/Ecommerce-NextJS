@@ -184,7 +184,7 @@ export async function fetchOrder(userEmail: string) {
             }
         },
         orderStatus,
-        createdAt,
+        createdAt
     }`
 
     const params = { userEmail };
