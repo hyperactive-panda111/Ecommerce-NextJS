@@ -15,6 +15,7 @@ const Orders = async () => {
 
         const email = session?.user?.email as string;
         const orderData: any = await fetchOrder(email);
+        console.log(orderData);
     
         return (
             <div>
